@@ -1,6 +1,7 @@
 package com.banana.auth.util;
 
 import com.banana.auth.enums.ApiCode;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ApiResult<T> {
     private Integer code;
     private String msg;
@@ -23,6 +25,10 @@ public class ApiResult<T> {
 
     public static <T> ApiResult<T> success(T data) {
         return success(ApiCode.SUCCESS, data);
+    }
+
+    public static <T> ApiResult<T> success() {
+        return success(ApiCode.SUCCESS, null);
     }
 
     public static <T> ApiResult<T> success(String msg, T data) {

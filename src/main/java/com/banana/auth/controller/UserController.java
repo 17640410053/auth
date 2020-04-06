@@ -5,6 +5,7 @@ import com.banana.auth.model.User;
 import com.banana.auth.service.UserService;
 import com.banana.auth.util.ApiResult;
 import com.banana.auth.util.RedisUtil;
+import com.banana.auth.vo.UserVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,8 +42,8 @@ public class UserController {
      * @return token
      */
     @RequestMapping("/loginByCode")
-    public ApiResult<String> loginByCode(@RequestBody User user, HttpServletRequest request) {
-        return ApiResult.success(userServiceImpl.login(user));
+    public ApiResult<String> loginByCode(@RequestBody UserVo user, HttpServletRequest request) {
+        return ApiResult.success(userServiceImpl.loginByCode(user));
     }
 
     /**
@@ -53,7 +54,8 @@ public class UserController {
      */
     @RequestMapping("/sendCode")
     public ApiResult<String> sendCode(@RequestBody User user, HttpServletRequest request) {
-        return ApiResult.success(userServiceImpl.login(user));
+        userServiceImpl.sendCode(user);
+        return ApiResult.success();
     }
 
     /**
