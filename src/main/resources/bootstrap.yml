@@ -1,6 +1,7 @@
 banana:
   base:
     package: com.banana.auth
+    schema: banana_auth
 server:
   port: 10013
 spring:
