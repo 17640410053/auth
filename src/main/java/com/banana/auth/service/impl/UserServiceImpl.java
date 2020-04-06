@@ -8,7 +8,6 @@ import com.banana.auth.util.RedisUtil;
 import com.banana.auth.util.SecretUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
