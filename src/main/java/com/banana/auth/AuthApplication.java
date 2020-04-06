@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan
+@MapperScan("com.banana.auth.mapper")
 public class AuthApplication {
 
     public static void main(String[] args) {
