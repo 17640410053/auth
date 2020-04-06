@@ -6,8 +6,6 @@ import com.banana.auth.model.User;
 import com.banana.auth.service.UserService;
 import com.banana.auth.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.Diagnostics;
-import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
