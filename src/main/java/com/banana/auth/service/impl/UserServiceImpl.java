@@ -6,8 +6,10 @@ import com.banana.auth.model.User;
 import com.banana.auth.service.UserService;
 import com.banana.auth.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.Diagnostics;
 import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
 
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
             throw new LoginException("用户名或密码错误");
         } else {
             log.info("user----->{}", userInfo.toString());
-            String token = MD5Encoder.encode((userInfo.getUserId() + System.currentTimeMillis()).getBytes());
+            String token = new String(DigestUtils.md5Digest((userInfo.getUserId() + System.currentTimeMillis()).getBytes()));
             log.info("token------>{}", token);
             if (RedisUtil.setToken(token, userInfo)) {
                 return token;
