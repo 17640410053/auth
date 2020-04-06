@@ -1,0 +1,15 @@
+banana:
+  base:
+    package: com.banana.auth
+server:
+  port: 10013
+spring:
+  application:
+    name: banana-auth
+  cloud:
+    config:
+      name: eureka,admin,mysql,redis,mybatis
+      uri: http://192.168.26.128.10010
+logging:
+  level:
+    com.banana.auth: debug
