@@ -35,6 +35,28 @@ public class UserController {
     }
 
     /**
+     * 登录使用验证码
+     *
+     * @param user 账号（用户名、手机号或邮箱），密码
+     * @return token
+     */
+    @RequestMapping("/loginByCode")
+    public ApiResult<String> loginByCode(@RequestBody User user, HttpServletRequest request) {
+        return ApiResult.success(userServiceImpl.login(user));
+    }
+
+    /**
+     * 发送验证码
+     *
+     * @param user 账号（用户名、手机号或邮箱），密码
+     * @return token
+     */
+    @RequestMapping("/sendCode")
+    public ApiResult<String> sendCode(@RequestBody User user, HttpServletRequest request) {
+        return ApiResult.success(userServiceImpl.login(user));
+    }
+
+    /**
      * 获得用户信息
      *
      * @param request 请求头信息

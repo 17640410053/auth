@@ -26,6 +26,15 @@ public class RedisUtil {
         redis = stringRedisTemplate;
     }
 
+
+    public static void set(String key, String value, long time, TimeUnit timeUnit) {
+        redis.opsForValue().set(key, value, time, timeUnit);
+    }
+
+    public static String get(String key) {
+        return redis.opsForValue().get(key);
+    }
+
     public static boolean setToken(String token, User userInfo) {
         try {
             ObjectMapper mapper = new ObjectMapper();
