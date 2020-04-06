@@ -5,11 +5,13 @@ import com.banana.auth.mapper.UserMapper;
 import com.banana.auth.model.User;
 import com.banana.auth.service.UserService;
 import com.banana.auth.util.RedisUtil;
+import com.banana.auth.util.SecretUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 
 @Slf4j
 @Service
@@ -25,13 +27,16 @@ public class UserServiceImpl implements UserService {
         if (userInfo == null) {
             throw new LoginException("用户名或密码错误");
         } else {
-            log.info("user----->{}", userInfo.toString());
-            String token = new String(DigestUtils.md5Digest((userInfo.getUserId() + System.currentTimeMillis()).getBytes()));
-            log.info("token------>{}", token);
+            String token;
+            try {
+                token = SecretUtil.encryptMd5(userInfo.getUserId() + System.currentTimeMillis());
+            } catch (UnsupportedEncodingException e) {
+                throw new LoginException("登录异常");
+            }
             if (RedisUtil.setToken(token, userInfo)) {
                 return token;
             } else {
-                throw new LoginException("登陆失败");
+                throw new LoginException("登录异常");
             }
         }
     }
