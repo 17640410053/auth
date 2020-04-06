@@ -22,9 +22,9 @@ import java.net.BindException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(LoginException.class)
-    public ApiResult<String> loginException(LoginException e){
-      log.info("",e);
-      return ApiResult.fail(e.getMessage());
+    public ApiResult<String> loginException(LoginException e) {
+        log.info("", e);
+        return ApiResult.fail(e.getMessage());
     }
 
     /**
@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ApiResult<String> exception(Exception e) {
+        log.info("", e);
         if (e instanceof BindException
                 || e instanceof HttpMessageNotReadableException
                 || e instanceof MethodArgumentNotValidException
