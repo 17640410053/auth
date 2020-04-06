@@ -31,7 +31,7 @@ public class UserController {
      * @return token
      */
     @RequestMapping("/login")
-    public ApiResult<String> login(@RequestBody User user, HttpServletRequest request) {
+    public ApiResult<String> login(@RequestBody User user) {
         return ApiResult.success(userServiceImpl.login(user));
     }
 
@@ -42,7 +42,7 @@ public class UserController {
      * @return token
      */
     @RequestMapping("/loginByCode")
-    public ApiResult<String> loginByCode(@RequestBody UserVo user, HttpServletRequest request) {
+    public ApiResult<String> loginByCode(@RequestBody UserVo user) {
         return ApiResult.success(userServiceImpl.loginByCode(user));
     }
 
@@ -53,7 +53,7 @@ public class UserController {
      * @return token
      */
     @RequestMapping("/sendCode")
-    public ApiResult<String> sendCode(@RequestBody User user, HttpServletRequest request) {
+    public ApiResult<String> sendCode(@RequestBody User user) {
         userServiceImpl.sendCode(user);
         return ApiResult.success();
     }
