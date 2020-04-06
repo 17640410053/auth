@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
             if (userInfo == null) {
                 throw new LoginException("账户不存在");
             } else {
+                RedisUtil.clear(user.getMail());
                 return createToken(userInfo);
             }
         } else {

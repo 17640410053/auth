@@ -35,6 +35,10 @@ public class RedisUtil {
         return redis.opsForValue().get(key);
     }
 
+    public static void clear(String key) {
+        redis.delete(key);
+    }
+
     public static boolean setToken(String token, User userInfo) {
         try {
             ObjectMapper mapper = new ObjectMapper();
