@@ -9,6 +9,7 @@ import com.banana.auth.util.SecretUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(User user) {
+        if ((StringUtils.isEmpty(user.getUsername()) && StringUtils.isEmpty(user.getMail()) && StringUtils.isEmpty(user.getPhone())) || StringUtils.isEmpty(user.getPassword())) {
+            throw new LoginException("用户名或密码错误");
+        }
         User userInfo = userMapper.selectOne(user);
         if (userInfo == null) {
             throw new LoginException("用户名或密码错误");
