@@ -25,8 +25,9 @@ public class UserServiceImpl implements UserService {
         if (userInfo == null) {
             throw new LoginException("用户名或密码错误");
         } else {
-            log.info(userInfo.toString());
+            log.info("user----->{}", userInfo.toString());
             String token = MD5Encoder.encode((userInfo.getUserId() + System.currentTimeMillis()).getBytes());
+            log.info("token------>{}", token);
             if (RedisUtil.setToken(token, userInfo)) {
                 return token;
             } else {
